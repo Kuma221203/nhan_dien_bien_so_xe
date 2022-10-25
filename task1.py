@@ -10,6 +10,7 @@
 import cv2
 import numpy as np
 import math
+import matplotpy
 SIZE_KERNEL = (3,3)
 SIZE_BLUR = (5,5)
 

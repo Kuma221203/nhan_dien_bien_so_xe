@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import Preprocess
 import math
+#quan la toi
 # import char_license_plate_recognition
 
 npaClassifications = np.loadtxt("classifications.txt", np.float32)
