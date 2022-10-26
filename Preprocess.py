@@ -1,5 +1,4 @@
 import cv2
-import numpy as np
  
 def imgEx(imgOriginal):
 	imgHSV = cv2.cvtColor(imgOriginal, cv2.COLOR_BGR2HSV)

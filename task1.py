@@ -51,8 +51,8 @@ def imgBlur(img):
 
 #step4
 def imgThresh(img):
- 	imgThresh = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 19, 9)
- 	return imgThresh
+	imgThresh = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 19, 9)
+	return imgThresh
 
 #step5
 def getEdge(img):
@@ -105,12 +105,9 @@ def rotationImg(screenCnts, imgThresh):
 
 #step9
 def findCharacter(imgLiPls):
-	kernel = cv2.getStructuringElement(cv2.MORPH_RECT, SIZE_KERNEL)
+	detect = 0
 	for imgLiPl in imgLiPls:
-		# cv2.imshow('a',imgLiPl)
-		# cv2.waitKey(0)
-		imgLiPlDilate = cv2.morphologyEx(imgLiPl, cv2.MORPH_DILATE, kernel, iterations = 1)
-		contours, hierarchy = cv2.findContours(imgLiPlDilate, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+		contours, hierarchy = cv2.findContours(imgLiPl, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 		height,width = imgLiPl.shape
 		char_x = []
 		char_ind_x = {}
@@ -143,9 +140,11 @@ def findCharacter(imgLiPls):
 					second_string += charCurrent
 			final_string = first_string + second_string
 			print(final_string)
-		else:
-			print('No find license plate')
-img = cv2.imread('img.jpg')
+			detect = detect + 1
+	if detect == 0:
+		print('No find license plate')
+
+img = cv2.imread('./img/img2.jpg')
 imgGray = imgEx(img)
 imgMorph = maximaizeContrast(imgGray)
 imgBlur = imgBlur(imgMorph)
